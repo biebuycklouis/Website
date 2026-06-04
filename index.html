@@ -11,17 +11,80 @@
     <style>
 
         :root {
-            --accent: #00d4ff;
+            --orange: #ff7a18;
+            --teal: #00d4ff;
+            --dark: #0b0b0b;
         }
 
         body {
             font-family: Arial, sans-serif;
             margin: 0;
-            background: #0f0f0f;
-            color: #f5f5f5;
+            background: var(--dark);
+            color: white;
             line-height: 1.6;
         }
 
+        .split {
+            display: flex;
+            height: 100vh;
+        }
+
+        .panel {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            text-align: center;
+            padding: 40px;
+        }
+
+        .louis{
+            background: linear-gradient(135deg, #001f26, #003b4a);
+            border-right: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .zeevlam {
+            background: linear-gradient(135deg, #2a1200, #4a1f00);
+        }
+
+        .panel h2{
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+        
+        .button {
+            background: var(--teal);
+            color: black;
+            padding: 12px 24px;
+            border-radius: 999px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 15px;
+            transition: 0.3s;
+        }
+
+        .button:hover {
+            transform: translateY(-3px);
+         }
+
+        .button.secondary {
+            background: transparent;
+            color: white;
+            border: 1px solid var(--orange);
+        }
+
+        @media (max-width: 768px) {
+            .split {
+                flex-direction: column;
+            }
+
+            .panel {
+                height: 50vh;
+            }
+        }
+        
         header {
             padding: 100px 20px;
             text-align: center;
@@ -151,7 +214,7 @@
 </section>
 
 <footer>
-    © 2026 Louis Biebuyck v0.13
+    © 2026 Louis Biebuyck v0.14
 </footer>
 
 </body>
