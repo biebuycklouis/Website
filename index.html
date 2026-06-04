@@ -1,206 +1,321 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Louis Biebuyck & Zeevlam</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;1,300&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    <title>Louis Biebuyck | Videografie & Webdesign</title>
+    :root {
+      --teal: #4ecdc4;
+      --teal-dim: #2a7a74;
+      --orange: #ff7a2f;
+      --orange-dim: #8a3e10;
+      --dark-left: #0b1615;
+      --dark-right: #160c04;
+    }
 
-    <meta name="description" content="klik op de webpagina voor meer info">
+    html, body {
+      height: 100%;
+      overflow: hidden;
+    }
 
-    <style>
+    body {
+      display: flex;
+      font-family: 'DM Mono', monospace;
+      cursor: none;
+    }
 
-        :root {
-            --orange: #ff7a18;
-            --teal: #00d4ff;
-            --dark: #0b0b0b;
-        }
+    /* custom cursor */
+    .cursor {
+      position: fixed;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: background 0.3s, transform 0.15s;
+      mix-blend-mode: difference;
+      background: #fff;
+    }
 
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            background: var(--dark);
-            color: white;
-            line-height: 1.6;
-        }
+    /* sides */
+    .side {
+      flex: 1;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      overflow: hidden;
+      transition: flex 0.5s cubic-bezier(0.77, 0, 0.18, 1);
+      text-decoration: none;
+    }
 
-        .split {
-            display: flex;
-            height: 100vh;
-        }
+    .side:hover { flex: 1.25; }
 
-        .panel {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+    .side-left  { background: var(--dark-left); }
+    .side-right { background: var(--dark-right); }
 
-            text-align: center;
-            padding: 40px;
-        }
+    /* divider */
+    .divider {
+      width: 1px;
+      height: 100%;
+      background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.15) 30%, rgba(255,255,255,0.15) 70%, transparent);
+      flex-shrink: 0;
+      z-index: 10;
+    }
 
-        .louis{
-            background: linear-gradient(135deg, #001f26, #003b4a);
-            border-right: 1px solid rgba(255,255,255,0.1);
-        }
+    /* background: code layer (left) */
+    .bg-code {
+      position: absolute;
+      inset: 0;
+      padding: 28px;
+      font-family: 'DM Mono', monospace;
+      font-size: 10.5px;
+      line-height: 1.75;
+      color: var(--teal);
+      opacity: 0.07;
+      overflow: hidden;
+      white-space: pre;
+      pointer-events: none;
+      transition: opacity 0.5s;
+    }
+    .side-left:hover .bg-code { opacity: 0.13; }
 
-        .zeevlam {
-            background: linear-gradient(135deg, #2a1200, #4a1f00);
-        }
+    /* background: film strip SVG (right) */
+    .bg-film {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      opacity: 0.07;
+      transition: opacity 0.5s;
+    }
+    .side-right:hover .bg-film { opacity: 0.13; }
 
-        .panel h2{
-            font-size: 3rem;
-            margin-bottom: 10px;
-        }
-        
-        .button {
-            background: var(--teal);
-            color: white;
-            padding: 12px 24px;
-            border-radius: 999px;
-            text-decoration: none;
-            font-weight: bold;
-            margin-top: 15px;
-            transition: 0.3s;
-        }
+    /* vignette overlay */
+    .side::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.55) 100%);
+    }
 
-        .button:hover {
-            transform: translateY(-3px);
-         }
+    /* content */
+    .content {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      text-align: center;
+      padding: 0 2rem;
+    }
 
-        .button.secondary {
-            background: transparent;
-            color: white;
-            border: 1px solid var(--orange);
-        }
+    .label {
+      font-size: 10px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      font-weight: 400;
+    }
+    .side-left  .label { color: var(--teal); }
+    .side-right .label { color: var(--orange); }
 
-        @media (max-width: 768px) {
-            .split {
-                flex-direction: column;
-            }
+    .title {
+      font-family: 'Fraunces', serif;
+      font-weight: 300;
+      font-size: clamp(2rem, 3.5vw, 3.2rem);
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+    }
+    .side-left  .title { color: #d8f5f2; }
+    .side-right .title { color: #f5ede3; }
 
-            .panel {
-                height: 50vh;
-            }
-        }
-        
-        header {
-            padding: 100px 20px;
-            text-align: center;
-        }
+    .subtitle {
+      font-size: 12px;
+      letter-spacing: 0.03em;
+      line-height: 1.6;
+      max-width: 200px;
+      font-weight: 300;
+    }
+    .side-left  .subtitle { color: rgba(180, 235, 230, 0.6); }
+    .side-right .subtitle { color: rgba(240, 210, 175, 0.6); }
 
-        .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 10px;
-        }
+    .btn {
+      margin-top: 8px;
+      padding: 10px 30px;
+      border-radius: 9999px;
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      letter-spacing: 0.05em;
+      font-weight: 400;
+      border: none;
+      cursor: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .btn:hover { transform: scale(1.05); }
 
-        .hero-buttons {
-            margin-top: 20px;
-        }
+    .side-left  .btn { background: var(--teal); color: #071210; box-shadow: 0 0 28px rgba(78,205,196,0); }
+    .side-right .btn { background: var(--orange); color: #120600; box-shadow: 0 0 28px rgba(255,122,47,0); }
+    .side-left:hover  .btn { box-shadow: 0 0 28px rgba(78,205,196,0.35); }
+    .side-right:hover .btn { box-shadow: 0 0 28px rgba(255,122,47,0.35); }
 
+    /* fade-in on load */
+    .side { animation: fadein 1.2s ease both; }
+    .side-right { animation-delay: 0.15s; }
+    .content { animation: slideup 1s ease both; animation-delay: 0.4s; }
+    .side-right .content { animation-delay: 0.55s; }
 
+    @keyframes fadein { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes slideup { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
 
-        .company-card {
-            background: #171717;
-            border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 24px;
-            padding: 50px;
-            margin: 40px auto;
-            max-width: 900px;
-        }
-
-        .company-card h2 {
-            font-size: 3rem;
-            margin-top: 0;
-        }
-
-        .section {
-            max-width: 900px;
-            margin: 40px auto;
-            padding: 20px;
-        }
-
-        footer {
-            text-align: center;
-            padding: 30px;
-            margin-top: 50px;
-            opacity: 0.7;
-        }
-
-    </style>
-
+    /* mobile */
+    @media (max-width: 640px) {
+      body { flex-direction: column; overflow-y: auto; }
+      html, body { height: auto; }
+      .side { min-height: 50vh; flex: none !important; width: 100%; }
+      .divider { width: 100%; height: 1px; }
+      .title { font-size: 2.4rem; }
+    }
+  </style>
 </head>
-
 <body>
 
-<header>
-    <div class="hero">
+  <div class="cursor" id="cursor"></div>
 
-        <h1>
-            Louis Biebuyck
-            <span>&</span>
-            Zeevlam
-        </h1>
+  <!-- LEFT: Louis Biebuyck -->
+  <a href="/louis-biebuyck" class="side side-left">
+    <div class="bg-code">&lt;!DOCTYPE html&gt;
+&lt;html lang="nl"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;title&gt;Project&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;header&gt;
+  &lt;nav&gt;
+    &lt;ul&gt;
+      &lt;li&gt;Home&lt;/li&gt;
+      &lt;li&gt;Over&lt;/li&gt;
+      &lt;li&gt;Contact&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/nav&gt;
+&lt;/header&gt;
+&lt;main&gt;
+  &lt;section class="hero"&gt;
+    &lt;h1&gt;Hello World&lt;/h1&gt;
+    &lt;p&gt;Welcome&lt;/p&gt;
+  &lt;/section&gt;
+  &lt;div class="grid"&gt;
+    &lt;div class="card"&gt;&lt;/div&gt;
+    &lt;div class="card"&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/main&gt;
+&lt;footer&gt;
+  &lt;p&gt;&amp;copy; 2025&lt;/p&gt;
+&lt;/footer&gt;
+&lt;/body&gt;
+&lt;/html&gt;
 
-        <p>
-            Websites, software en digitale oplossingen.<br>
-            Videografie, content en storytelling
-        </p>
+.hero {
+  display: flex;
+  align-items: center;
+  min-height: 100vh;
+  padding: 2rem;
+}
+.grid {
+  display: grid;
+  grid-template-columns:
+    repeat(auto-fit,
+    minmax(240px, 1fr));
+  gap: 1.5rem;
+  padding: 2rem;
+}
+.card {
+  border-radius: 12px;
+  padding: 2rem;
+  background: #fff;
+  box-shadow: 0 2px 12px
+    rgba(0,0,0,0.08);
+}
+nav ul {
+  display: flex;
+  list-style: none;
+  gap: 2rem;
+}
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  .hero {
+    padding: 4rem 1rem;
+  }
+}</div>
 
-        <div class="hero-buttons">
-
-            <a href="#louis" class="button">Louis Biebuyck</a>
-
-            <a href="#zeevlam" class="button secondary">Zeevlam</a>
-
-        </div>
-
+    <div class="content">
+      <span class="label">Webdesign &amp; development</span>
+      <h1 class="title">Louis<br>Biebuyck</h1>
+      <p class="subtitle">Websites die werken en er goed uitzien</p>
+      <button class="btn">Meer info</button>
     </div>
-</header>
+  </a>
 
-<main class="split">
+  <div class="divider"></div>
 
-    <section class="panel louis">
-        <h2>Louis Biebuyck</h2>
-        <p>Webdesign</p>
+  <!-- RIGHT: Zeevlam -->
+  <a href="/zeevlam" class="side side-right">
+    <svg class="bg-film" viewBox="0 0 500 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <rect x="50" y="30" width="400" height="840" rx="6" fill="none" stroke="#ff7a2f" stroke-width="1.5"/>
+      <rect x="50" y="30" width="400" height="60" fill="#ff7a2f" opacity="0.35"/>
+      <rect x="50" y="810" width="400" height="60" fill="#ff7a2f" opacity="0.35"/>
+      <rect x="65" y="43" width="28" height="34" rx="3" fill="#ff7a2f" opacity="0.8"/>
+      <rect x="107" y="43" width="28" height="34" rx="3" fill="#ff7a2f" opacity="0.8"/>
+      <rect x="149" y="43" width="28" height="34" rx="3" fill="#ff7a2f" opacity="0.8"/>
+      <rect x="191" y="43" width="28" height="34" rx="3" fill="#ff7a2f" opacity="0.8"/>
+      <rect x="233" y="43" width="28" height="34" rx="3" fill="#ff7a2f" opacity="0.8"/>
+      <rect x="275" y="43" width="28" height="34" rx="3" fill="#ff7a2f" opacity="0.8"/>
+      <rect x="317" y="43" width="28" height="34" rx="3" fill="#ff7a2f" opacity="0.8"/>
+      <rect x="359" y="43" width="28" height="34" rx="3" fill="#ff7a2f" opacity="0.8"/>
+      <rect x="401" y="43" width="28" height="34" rx="3" fill="#ff7a2f" opacity="0.8"/>
+      <rect x="65" y="823" width="28" height="34" rx="3" fill="#ff7a2f" opacity="0.8"/>
+      <rect x="107" y="823" width="28" height="34" rx="3" fill="#ff7a2f" opacity="0.8"/>
+      <rect x="149" y="823" width="28" height="34" rx="3" fill="#ff7a2f" opacity="0.8"/>
+      <rect x="191" y="823" width="28" height="34" rx="3" fill="#ff7a2f" opacity="0.8"/>
+      <rect x="233" y="823" width="28" height="34" rx="3" fill="#ff7a2f" opacity="0.8"/>
+      <rect x="275" y="823" width="28" height="34" rx="3" fill="#ff7a2f" opacity="0.8"/>
+      <line x1="50" y1="210" x2="450" y2="210" stroke="#ff7a2f" stroke-width="0.6" opacity="0.4"/>
+      <line x1="50" y1="360" x2="450" y2="360" stroke="#ff7a2f" stroke-width="0.6" opacity="0.4"/>
+      <line x1="50" y1="510" x2="450" y2="510" stroke="#ff7a2f" stroke-width="0.6" opacity="0.4"/>
+      <line x1="50" y1="660" x2="450" y2="660" stroke="#ff7a2f" stroke-width="0.6" opacity="0.4"/>
+      <circle cx="250" cy="450" r="65" fill="none" stroke="#ff7a2f" stroke-width="1.5" opacity="0.7"/>
+      <polygon points="234,425 234,475 284,450" fill="#ff7a2f" opacity="0.6"/>
+    </svg>
 
-        <a href="#louis" class="button">
-            Meer info
-        </a>
-    </section>
+    <div class="content">
+      <span class="label">Videografie &amp; storytelling</span>
+      <h1 class="title">Zeevlam</h1>
+      <p class="subtitle">Visuele verhalen die blijven hangen</p>
+      <button class="btn">Meer info</button>
+    </div>
+  </a>
 
-    <section class="panel zeevlam">
-        <h2>Zeevlam</h2>
-        <p>Videografie, content & storytelling</p>
-
-        <a href="#zeevlam" class="button secondary">
-            Meer info
-        </a>
-    </section>
-
-</main>
-
-<section class="section">
-
-    <h2>Contact</h2>
-
-    <p>
-        Interesse in samenwerking? Neem contact op.
-    </p>
-
-    <p>
-        📧 Email:
-        <a href="mailto:biebuyck.louis@gmail.com" style="color: var(--accent);">
-            biebuyck.louis@gmail.com
-        </a>
-    </p>
-
-</section>
-
-<footer>
-    © 2026 Louis Biebuyck v0.15
-</footer>
+  <script>
+    const cursor = document.getElementById('cursor');
+    document.addEventListener('mousemove', e => {
+      cursor.style.left = e.clientX + 'px';
+      cursor.style.top  = e.clientY + 'px';
+    });
+  </script>
 
 </body>
 </html>
