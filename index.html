@@ -3,12 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Louis Biebuyck | Videografie & Webdesign</title>
-    <meta name="description"
-        content="klik op de webpagina voor meer info">
+
+    <meta name="description" content="klik op de webpagina voor meer info">
 
     <style>
-        
+
+        :root {
+            --accent: #00d4ff;
+        }
+
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -16,111 +21,140 @@
             color: #f5f5f5;
             line-height: 1.6;
         }
-       
-        :root {
-            --accent: #00d4ff;
+
+        header {
+            padding: 100px 20px;
+            text-align: center;
         }
-        
-        <body>
-            <!--header, obviously-->
-        <header>
-            <div class="hero">
 
-            <h1>
-                Louis Biebuyck
-                <span>&</span>
-                Zeevlam
-            </h1>
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
 
-            <p>
-                Websites, software en digitale oplossingen.
-                <br>
-                Videografie, content en storytelling
-            </p>
+        .hero-buttons {
+            margin-top: 20px;
+        }
 
-                <div class="hero-buttons">
+        .button {
+            display: inline-block;
+            padding: 12px 24px;
+            margin: 5px;
+            background: var(--accent);
+            color: black;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: bold;
+        }
 
-                <a href="#louis" class="button">
-                    Louis Biebuyck
-                </a>
+        .button.secondary {
+            background: transparent;
+            color: white;
+            border: 1px solid white;
+        }
 
-                <a href="#zeevlam" class="button secondary">
-                    Zeevlam
-                </a>
+        .company-card {
+            background: #171717;
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 24px;
+            padding: 50px;
+            margin: 40px auto;
+            max-width: 900px;
+        }
 
-                </div>
-            </div>
-        </header> 
+        .company-card h2 {
+            font-size: 3rem;
+            margin-top: 0;
+        }
 
-<!-- styling van de company cards-->
-    
-    .company-card {
-        background: #171717;
-        border: 1px solid rgba(255,255,255,0.08);
+        .section {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 20px;
+        }
 
-        border-radius: 24px;
+        footer {
+            text-align: center;
+            padding: 30px;
+            margin-top: 50px;
+            opacity: 0.7;
+        }
 
-        padding: 50px;
+    </style>
 
-        margin-bottom: 40px;
-    }
+</head>
 
-    .company-card h2 {
-        font-size: 3rem;
-        margin-top: 0;
-    }  
-        
-<!-- vanaf hier eindigt de header, en gaan we een sectie bouwen voor de twee company cards-->
+<body>
 
-    <section id="louis" class="company-card">
+<header>
+    <div class="hero">
 
-        <h2>Louis biebuyck</h2>
+        <h1>
+            Louis Biebuyck
+            <span>&</span>
+            Zeevlam
+        </h1>
 
         <p>
-            Websites, webapps en andere ondersteuning voor ondernemers en bedrijven
-        </p>
-
-        <a class="button" href="mailto:biebuyck.louis@gmail.com">
-            Contact opnemen
-        </a>
-
-    </section>
-
-    <section id="zeevlam" class="company-card">
-
-        <h2>Zeevlam</h2>
-
-        <p>
+            Websites, software en digitale oplossingen.<br>
             Videografie, content en storytelling
         </p>
 
-        <a class="button" href="mailto:zeevlamfilms@gmail.com">
-            Contact opnemen
+        <div class="hero-buttons">
+
+            <a href="#louis" class="button">Louis Biebuyck</a>
+
+            <a href="#zeevlam" class="button secondary">Zeevlam</a>
+
+        </div>
+
+    </div>
+</header>
+
+<section id="louis" class="company-card">
+
+    <h2>Louis Biebuyck</h2>
+
+    <p>
+        Websites, webapps en andere ondersteuning voor ondernemers en bedrijven.
+    </p>
+
+    <a class="button" href="mailto:biebuyck.louis@gmail.com">
+        Contact opnemen
+    </a>
+
+</section>
+
+<section id="zeevlam" class="company-card">
+
+    <h2>Zeevlam</h2>
+
+    <p>
+        Videografie, content en storytelling.
+    </p>
+
+    <a class="button" href="mailto:zeevlamfilms@gmail.com">
+        Contact opnemen
+    </a>
+
+</section>
+
+<section class="section">
+
+    <h2>Contact</h2>
+
+    <p>
+        Interesse in samenwerking? Neem contact op.
+    </p>
+
+    <p>
+        📧 Email:
+        <a href="mailto:biebuyck.louis@gmail.com" style="color: var(--accent);">
+            biebuyck.louis@gmail.com
         </a>
+    </p>
 
-    
-
-
-    <section class="section">
-        <h2>Contact</h2>
-        <p>
-            Interesse in samenwerking? Neem contact op.
-        </p>
-
-        <p>
-            📧 Email:
-            <a href="mailto:biebuyck.louis@gmail.com">
-                biebuyck.louis@gmail.com
-            </a>
-        </p>
-
-
-        <a class="button" href="mailto:jouwemail@email.com">
-            Contact opnemen
-        </a>
-    </section>
-
-</div>
+</section>
 
 <footer>
     © 2026 Louis Biebuyck v0.10
