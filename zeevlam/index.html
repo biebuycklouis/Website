@@ -334,72 +334,22 @@
     /* Dark gradient overlay that sits on top of the background.
        This is what makes text readable over the dark background.
        On hover it gets darker to make the description text more readable. */
-    .film-overlay {
-      position: absolute;
-      inset: 0;
-      padding: 28px;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;  /* pushes tag/title/desc to the bottom */
-      background: linear-gradient(to top, rgba(22,12,4,0.98) 0%, rgba(22,12,4,0.1) 55%, transparent 100%);
-      transition: background 0.4s;
-    }
-    .film-card:hover .film-overlay {
-      background: linear-gradient(to top, rgba(22,12,4,0.99) 0%, rgba(22,12,4,0.55) 100%);
-    }
+    
+    
 
     /* Small category label e.g. "Documentaire · Kustleven" */
-    .film-tag {
-      font-size: 9px;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: var(--orange);
-      margin-bottom: 7px;
-    }
+   
 
     /* Project title e.g. "Horizon" */
-    .film-name {
-      font-family: 'Fraunces', serif;
-      font-weight: 300;
-      font-size: 1.3rem;
-      letter-spacing: -0.02em;
-      color: var(--text);
-      margin-bottom: 7px;
-    }
+    
     /* Larger title size for bigger cards */
     .film-card.landscape .film-name { font-size: 1.8rem; }
     .film-card.wide .film-name { font-size: 2rem; }
 
-    /* Description text — hidden by default, slides up and fades in on hover */
-    .film-desc {
-      font-size: 11px;
-      color: var(--text-dim);
-      font-weight: 300;
-      line-height: 1.65;
-      max-width: 320px;
-      opacity: 0;
-      transform: translateY(8px);
-      transition: opacity 0.3s 0.05s, transform 0.3s 0.05s;
-    }
-    .film-card:hover .film-desc { opacity: 1; transform: translateY(0); }
-
-    /* The circular play button icon in the top-right of each card.
-       Hidden by default, appears on hover. */
-    .play-indicator {
-      position: absolute;
-      top: 24px; right: 24px;
-      width: 40px; height: 40px;
-      border: 1px solid rgba(255,122,47,0.6);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      transform: scale(0.75);
-      transition: opacity 0.3s, transform 0.3s;
-    }
-    .film-card:hover .play-indicator { opacity: 1; transform: scale(1); }
-    .play-indicator svg { margin-left: 2px; } /* nudges the triangle icon to look visually centred */
+    
+   
+  
+    
 
     /* Small number in the top-left of each card e.g. "01", "02" */
     .film-number {
@@ -623,15 +573,7 @@
   border: none;
 }
 
-.film-overlay {
-  position: relative;
-  z-index: 2;
-  background: linear-gradient(
-    to top,
-    rgba(0,0,0,0.8),
-    rgba(0,0,0,0.2)
-  );
-}
+
 
     /* The email address link — to change the email, find the <a href="mailto:..."> in the HTML */
     .contact-link {
@@ -1079,7 +1021,7 @@
   ============================================================= -->
   <footer>
     <p>&copy; 2025 Zeevlam</p>
-    <p>Videografie & storytelling — België (v1.04)</p>
+    <p>Videografie & storytelling — België (v1.05)</p>
   </footer>
 
   <script>
