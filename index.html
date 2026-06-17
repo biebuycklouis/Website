@@ -30,7 +30,7 @@
       cursor: none;
     }
 
-    /* custom cursor */
+    /* cursor bolletje */
     .cursor {
       position: fixed;
       width: 12px;
@@ -44,7 +44,7 @@
       background: #fff;
     }
 
-    /* sides */
+    /* zijkanten */
     .side {
       flex: 1;
       position: relative;
@@ -75,14 +75,14 @@
     }
 
     .footer {
-      position: fixed;      /* stays in the viewport */
-      bottom: 0;            /* stick to bottom */
-      right: 0;             /* stick to right */
-      color: white;         /* text color */
+      position: fixed;      
+      bottom: 0;           
+      right: 0;             
+      color: white;       
       padding: 10px;
     }
 
-    /* background: code layer (left) */
+
     .bg-code {
       position: absolute;
       inset: 0;
@@ -99,7 +99,7 @@
     }
     .side-left:hover .bg-code { opacity: 0.13; }
 
-    /* background: film strip SVG (right) */
+ 
     .bg-film {
       position: absolute;
       inset: 0;
@@ -111,7 +111,7 @@
     }
     .side-right:hover .bg-film { opacity: 0.13; }
 
-    /* vignette overlay */
+
     .side::after {
       content: '';
       position: absolute;
@@ -120,7 +120,7 @@
       background: radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.55) 100%);
     }
 
-    /* content */
+  
     .content {
       position: relative;
       z-index: 2;
@@ -180,7 +180,7 @@
     .side-left:hover  .btn { box-shadow: 0 0 28px rgba(78,205,196,0.35); }
     .side-right:hover .btn { box-shadow: 0 0 28px rgba(255,122,47,0.35); }
 
-    /* fade-in on load */
+   
     .side { animation: fadein 1.2s ease both; }
     .side-right { animation-delay: 0.15s; }
     .content { animation: slideup 1s ease both; animation-delay: 0.4s; }
@@ -189,7 +189,6 @@
     @keyframes fadein { from { opacity: 0; } to { opacity: 1; } }
     @keyframes slideup { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
 
-    /* mobile */
     @media (max-width: 640px) {
       body { flex-direction: column; overflow-y: auto; }
       html, body { height: auto; }
