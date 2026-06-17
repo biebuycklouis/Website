@@ -1,128 +1,87 @@
 <!DOCTYPE html>
-<!-- This line tells the browser this is an HTML5 document -->
 <html lang="nl">
 
 <head>
-  <!-- ============================================================
-       HEAD SECTION
-       Everything here is invisible to the user but important for
-       the browser. It sets up the page title, fonts, and all the
-       styling (CSS) that controls how things look.
-  ============================================================ -->
 
-  <!-- Tells the browser to use UTF-8 characters (supports é, ë, etc.) -->
   <meta charset="UTF-8" />
   <meta name="google-site-verification" content="FAnq8R2IVDqDAfhFUiAQpvjj4lMzjgKknE9manMckbk" />
-
-  <!-- Makes the site look correct on mobile phones -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <!-- The title shown in the browser tab -->
+  
   <title>Zeevlam — Videografie & Storytelling</title>
 
-  <!-- These three lines load the custom fonts from Google Fonts.
-       Fraunces = the elegant serif font used for big titles
-       DM Mono  = the monospace font used for everything else
-       The preconnect lines just make them load faster. -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;1,300&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet" />
 
   <style>
-    /* =============================================================
-       CSS RESET
-       Browsers add their own default spacing and sizing to elements.
-       This removes all of that so we start with a clean slate.
-    ============================================================= */
+
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    /* =============================================================
-       CSS VARIABLES (colour palette & reusable values)
-       Define all colours once here at the top. If you want to
-       change the orange accent, just change --orange here and it
-       updates everywhere on the page automatically.
-    ============================================================= */
     :root {
-      --orange: #ff7a2f;        /* main accent colour — buttons, labels, highlights */
-      --orange-dim: #8a3e10;    /* darker orange, not currently used but available */
-      --dark: #160c04;          /* page background — very dark warm brown */
-      --dark-2: #1e1108;        /* slightly lighter dark, used for cards */
-      --text: #f5ede3;          /* main text colour — warm off-white */
-      --text-dim: rgba(240, 210, 175, 0.6);   /* dimmed text — descriptions, subtitles */
-      --text-faint: rgba(240, 210, 175, 0.18); /* very faint text — footer, dividers */
+      --orange: #ff7a2f;        
+      --orange-dim: #8a3e10;    
+      --dark: #160c04;          
+      --dark-2: #1e1108;        
+      --text: #f5ede3;         
+      --text-dim: rgba(240, 210, 175, 0.6);   
+      --text-faint: rgba(240, 210, 175, 0.18); 
     }
 
-    /* Enables smooth scrolling when clicking anchor links like #portfolio */
+
     html { scroll-behavior: smooth; }
 
-    /* =============================================================
-       BODY — base styles that apply to the whole page
-    ============================================================= */
+
     body {
-      background: var(--dark);           /* dark background from variables above */
-      color: var(--text);                /* default text colour */
-      font-family: 'DM Mono', monospace; /* default font for all text */
-      cursor: none;                      /* hides the default cursor (we draw our own below) */
-      overflow-x: hidden;                /* prevents horizontal scrollbar */
+      background: var(--dark);         
+      color: var(--text);               
+      font-family: 'DM Mono', monospace; 
+      cursor: none;                     
+      overflow-x: hidden;                
     }
 
-    /* =============================================================
-       CUSTOM CURSOR
-       A small white dot that follows the mouse. The mix-blend-mode
-       makes it invert colours so it's always visible regardless of
-       what's behind it. Controlled by JavaScript at the bottom.
-    ============================================================= */
+
     .cursor {
-      position: fixed;           /* stays in place relative to the viewport */
+      position: fixed;           
       width: 12px;
       height: 12px;
-      border-radius: 50%;        /* makes it a circle */
+      border-radius: 50%;       
       background: #fff;
-      pointer-events: none;      /* click-through — doesn't block clicking on things */
-      z-index: 9999;             /* always on top of everything */
-      transform: translate(-50%, -50%); /* centres the dot on the actual cursor position */
-      mix-blend-mode: difference; /* inverts colours — white on dark = visible, white on light = visible */
+      pointer-events: none;     
+      z-index: 9999;             
+      transform: translate(-50%, -50%); 
+      mix-blend-mode: difference; 
     }
 
-    /* =============================================================
-       NAVIGATION BAR
-       Fixed at the top of the screen so it stays visible while
-       scrolling. Contains the back button and the brand name.
-    ============================================================= */
+   
     nav {
-      position: fixed;           /* sticks to the top of the screen */
-      top: 0; left: 0; right: 0; /* stretches full width */
-      z-index: 100;              /* sits above all page content */
-      padding: 28px 52px;        /* space inside: top/bottom 28px, left/right 52px */
-      display: flex;             /* puts back button and brand name side by side */
-      justify-content: space-between; /* pushes them to opposite ends */
+      position: fixed;           
+      top: 0; left: 0; right: 0; 
+      z-index: 100;             
+      padding: 28px 52px;        
+      display: flex;            
+      justify-content: space-between;
       align-items: center;
-      /* gradient fades from the dark background colour to transparent,
-         so the nav blends into the hero section below it */
       background: linear-gradient(to bottom, var(--dark) 50%, transparent);
     }
 
-    /* The "← Terug" back button in the nav */
+
     .nav-back {
       font-size: 11px;
       letter-spacing: 2px;
       text-transform: uppercase;
       color: var(--text-dim);
-      text-decoration: none;     /* removes underline from the link */
+      text-decoration: none;     
       display: inline-flex;
       align-items: center;
-      gap: 10px;                 /* space between the arrow icon and the word "Terug" */
-      transition: color 0.2s;   /* smooth colour change on hover */
+      gap: 10px;                 
+      transition: color 0.2s;   
     }
-    /* When you hover the back button, text turns orange */
+    
     .nav-back:hover { color: var(--orange); }
-
-    /* The arrow icon inside the back button */
     .nav-back .arrow { transition: transform 0.2s; display: inline-flex; }
-    /* On hover, the arrow slides 4px to the left */
     .nav-back:hover .arrow { transform: translateX(-4px); }
 
-    /* "Zeevlam" label on the right side of the nav */
+
     .nav-label {
       font-size: 10px;
       letter-spacing: 3px;
@@ -130,48 +89,37 @@
       color: var(--orange);
     }
 
-    /* =============================================================
-       HERO SECTION
-       The big full-screen opening section with the title.
-       min-height: 100vh means it's always at least as tall as
-       the browser window.
-    ============================================================= */
     .hero {
       min-height: 100vh;
       display: flex;
-      align-items: flex-end;     /* pushes content to the bottom of the section */
-      padding: 0 52px 80px;      /* 52px sides, 80px bottom padding */
-      position: relative;        /* needed so child elements can use position: absolute */
-      overflow: hidden;          /* clips the film strip SVG so it doesn't overflow */
+      align-items: flex-end;    
+      padding: 0 52px 80px;     
+      position: relative;      
+      overflow: hidden;       
     }
-
-    /* Subtle orange glow in the upper right of the hero — purely decorative */
+    
     .hero-glow {
       position: absolute;
-      inset: 0;                  /* fills the entire hero section */
+      inset: 0;                  
       background: radial-gradient(ellipse 50% 55% at 70% 40%, rgba(255,122,47,0.08) 0%, transparent 70%);
-      pointer-events: none;      /* decorative only, doesn't block clicks */
+      pointer-events: none;    
     }
 
-    /* The film strip SVG decoration on the right side of the hero.
-       To edit this, look for <svg class="hero-film"> in the HTML below. */
     .hero-film {
       position: absolute;
       top: 0; right: 0;
       width: 42%;
       height: 100%;
       pointer-events: none;
-      opacity: 0.07;             /* very faint — increase this number to make it more visible */
+      opacity: 0.07;           
     }
 
-    /* Wrapper for the text content in the hero (eyebrow, title, description, button) */
     .hero-content {
       position: relative;
-      z-index: 2;                /* sits above the decorative background elements */
+      z-index: 2;              
       max-width: 780px;
     }
 
-    /* "VIDEOGRAFIE & STORYTELLING" small label above the title */
     .hero-eyebrow {
       display: block;
       font-size: 10px;
@@ -179,30 +127,26 @@
       text-transform: uppercase;
       color: var(--orange);
       margin-bottom: 28px;
-      /* starts invisible and slightly below position, then animates in */
       opacity: 0;
       transform: translateY(10px);
-      animation: reveal 0.8s 0.3s ease forwards; /* 0.3s delay before starting */
+      animation: reveal 0.8s 0.3s ease forwards;
     }
 
-    /* The big "Zeevlam" title */
     .hero-title {
-      font-family: 'Fraunces', serif; /* switches to the serif display font */
-      font-weight: 300;               /* light weight */
-      font-size: clamp(4.5rem, 10vw, 9.5rem); /* responsive: min 4.5rem, scales with viewport, max 9.5rem */
-      line-height: 0.9;               /* tight line spacing for large display text */
-      letter-spacing: -0.04em;        /* slightly compressed letter spacing */
+      font-family: 'Fraunces', serif;
+      font-weight: 300;               
+      font-size: clamp(4.5rem, 10vw, 9.5rem); 
+      line-height: 0.9;             
+      letter-spacing: -0.04em;        
       color: var(--text);
       margin-bottom: 36px;
       opacity: 0;
       transform: translateY(20px);
-      animation: reveal 1s 0.5s ease forwards; /* 0.5s delay */
+      animation: reveal 1s 0.5s ease forwards; 
     }
-    /* The <em> tag inside the title gets the orange colour.
-       In the HTML: <em>Zeev</em>lam makes "Zeev" italic and orange */
+   
     .hero-title em { font-style: italic; color: var(--orange); }
 
-    /* The short description paragraph below the title */
     .hero-desc {
       font-size: 13px;
       line-height: 1.85;
@@ -212,47 +156,37 @@
       margin-bottom: 44px;
       opacity: 0;
       transform: translateY(12px);
-      animation: reveal 0.8s 0.7s ease forwards; /* 0.7s delay */
+      animation: reveal 0.8s 0.7s ease forwards; 
     }
 
-    /* "Bekijk werk →" button in the hero */
     .hero-cta {
       display: inline-flex;
       align-items: center;
-      gap: 12px;                 /* space between text and arrow icon */
+      gap: 12px;                
       padding: 12px 32px;
       background: var(--orange);
-      color: #120600;            /* very dark text on the orange button */
+      color: #120600;         
       font-family: 'DM Mono', monospace;
       font-size: 12px;
       letter-spacing: 0.05em;
       text-decoration: none;
-      border-radius: 9999px;     /* pill shape */
+      border-radius: 9999px;    
       transition: transform 0.2s, box-shadow 0.2s;
       opacity: 0;
-      animation: reveal 0.6s 0.9s ease forwards; /* last element to appear, 0.9s delay */
+      animation: reveal 0.6s 0.9s ease forwards; 
     }
-    /* On hover: slightly bigger with an orange glow behind it */
+
     .hero-cta:hover {
       transform: scale(1.04);
       box-shadow: 0 0 28px rgba(255,122,47,0.32);
     }
 
-    /* =============================================================
-       REVEAL ANIMATION
-       Used by all the hero elements above. Animates from
-       invisible+slightly-below to fully visible at normal position.
-    ============================================================= */
     @keyframes reveal {
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* =============================================================
-       SECTION — generic padding for all content sections
-    ============================================================= */
     .section { padding: 120px 52px; }
 
-    /* Orange small label that appears above section titles e.g. "Geselecteerd werk" */
     .section-label {
       display: block;
       font-size: 10px;
@@ -262,7 +196,6 @@
       margin-bottom: 14px;
     }
 
-    /* Large section title e.g. "Recente films" */
     .section-title {
       font-family: 'Fraunces', serif;
       font-weight: 300;
@@ -274,85 +207,53 @@
     }
     .section-title em { font-style: italic; color: var(--orange); }
 
-    /* =============================================================
-       PORTFOLIO GRID
-       The video showcase section. Uses CSS Grid to lay out cards
-       in a 3-column layout with some cards spanning multiple columns.
-    ============================================================= */
     .portfolio-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr 1fr; /* 3 equal columns */
-      gap: 3px;                            /* tiny gap between cards */
+      grid-template-columns: 1fr 1fr 1fr; 
+      gap: 3px;                           
     }
 
-    /* Base style for every film card */
     .film-card {
       position: relative;
-      overflow: hidden;    /* clips the background decoration and hover zoom effect */
+      overflow: hidden;   
       cursor: none;
-      aspect-ratio: 9/12; /* default card shape: portrait */
+      aspect-ratio: 9/12; 
     }
 
-    /* Landscape card spans 2 of the 3 columns */
     .film-card.landscape {
       grid-column: span 2;
       aspect-ratio: 16/9;
     }
 
-    /* Wide card spans all 3 columns — full width */
     .film-card.wide {
       grid-column: span 3;
       aspect-ratio: 21/9;
     }
 
-    /* The dark gradient background of each card.
-       On hover it scales up slightly for a zoom effect. */
     .film-bg {
       position: absolute;
       inset: 0;
-      transition: transform 0.7s cubic-bezier(0.33, 1, 0.68, 1); /* smooth ease-out zoom */
+      transition: transform 0.7s cubic-bezier(0.33, 1, 0.68, 1); 
     }
     .film-card:hover .film-bg { transform: scale(1.05); }
 
-    /* Individual background gradient colours — one per card.
-       To change a card's background colour, edit these gradients. */
     .fb-1 { background: linear-gradient(160deg, #200e02 0%, #5a2a08 60%, #1c0c02 100%); }
     .fb-2 { background: linear-gradient(145deg, #1a0b02 0%, #4a2208 100%); }
     .fb-3 { background: linear-gradient(135deg, #1c0d02 0%, #522610 100%); }
     .fb-4 { background: linear-gradient(150deg, #1e0e03 0%, #4d2409 100%); }
     .fb-5 { background: linear-gradient(160deg, #1a0b02 0%, #4a2006 100%); }
 
-    /* The SVG geometric decoration on top of the card background.
-       Look for <svg class="film-deco"> inside each card in the HTML. */
     .film-deco {
       position: absolute;
       inset: 0;
       width: 100%;
       height: 100%;
-      opacity: 0.14; /* faint — increase to make the pattern more visible */
+      opacity: 0.14; 
     }
 
-    /* Dark gradient overlay that sits on top of the background.
-       This is what makes text readable over the dark background.
-       On hover it gets darker to make the description text more readable. */
-    
-    
-
-    /* Small category label e.g. "Documentaire · Kustleven" */
-   
-
-    /* Project title e.g. "Horizon" */
-    
-    /* Larger title size for bigger cards */
     .film-card.landscape .film-name { font-size: 1.8rem; }
     .film-card.wide .film-name { font-size: 2rem; }
 
-    
-   
-  
-    
-
-    /* Small number in the top-left of each card e.g. "01", "02" */
     .film-number {
       position: absolute;
       top: 24px; left: 24px;
@@ -361,13 +262,9 @@
       color: rgba(255,122,47,0.4);
     }
 
-    /* =============================================================
-       PRICING CARDS
-       Three-column grid of pricing tiers.
-    ============================================================= */
     .pricing-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr); /* 3 equal columns */
+      grid-template-columns: repeat(3, 1fr); 
       gap: 3px;
     }
 
@@ -378,17 +275,15 @@
       overflow: hidden;
       transition: background 0.3s;
     }
-    /* Subtle orange tint on hover */
+
     .pricing-card:hover { background: rgba(255,122,47,0.04); }
 
-    /* The highlighted "Meest gekozen" middle card */
     .pricing-card.featured {
       background: rgba(255,122,47,0.06);
-      outline: 1px solid rgba(255,122,47,0.22); /* subtle orange border */
+      outline: 1px solid rgba(255,122,47,0.22);
     }
     .pricing-card.featured:hover { background: rgba(255,122,47,0.10); }
 
-    /* "Meest gekozen" pill badge in the top-right of the featured card */
     .pricing-badge {
       position: absolute;
       top: 22px; right: 22px;
@@ -401,7 +296,6 @@
       border-radius: 9999px;
     }
 
-    /* Tier name e.g. "Basis", "Branded", "Cinematic" */
     .pricing-tier {
       font-size: 9px;
       letter-spacing: 3px;
@@ -410,7 +304,6 @@
       margin-bottom: 18px;
     }
 
-    /* The big price number e.g. "€800" */
     .pricing-price {
       font-family: 'Fraunces', serif;
       font-weight: 300;
@@ -421,7 +314,6 @@
       margin-bottom: 10px;
     }
 
-    /* Short description below the price */
     .pricing-note {
       font-size: 11px;
       color: var(--text-dim);
@@ -429,9 +321,8 @@
       font-weight: 300;
     }
 
-    /* The list of features/inclusions */
     .pricing-features {
-      list-style: none; /* removes default bullet points */
+      list-style: none; 
       display: flex;
       flex-direction: column;
       gap: 13px;
@@ -447,20 +338,15 @@
       line-height: 1.5;
     }
 
-    /* Adds an orange "—" dash before each list item instead of a bullet */
     .pricing-features li::before {
       content: '—';
       color: var(--orange);
       flex-shrink: 0;
     }
 
-    /* =============================================================
-       ABOUT / AANPAK SECTION
-       Two-column layout: text on the left, film strip visual on the right.
-    ============================================================= */
     .about-layout {
       display: grid;
-      grid-template-columns: 5fr 4fr; /* left column is slightly wider */
+      grid-template-columns: 5fr 4fr; 
       gap: 96px;
       align-items: start;
     }
@@ -476,7 +362,6 @@
 
     .about-visual { position: relative; }
 
-    /* The decorative film strip column on the right side of the about section */
     .about-filmstrip {
       width: 100%;
       aspect-ratio: 2/3;
@@ -485,7 +370,6 @@
       overflow: hidden;
     }
 
-    /* Inner container that stacks the individual frames */
     .about-filmstrip-inner {
       position: absolute;
       inset: 0;
@@ -495,7 +379,6 @@
       padding: 3px;
     }
 
-    /* Each individual "frame" in the film strip — just a dark rectangle with a number */
     .film-frame {
       flex: 1;
       background: rgba(255,122,47,0.04);
@@ -503,7 +386,6 @@
       position: relative;
     }
 
-    /* The frame number e.g. "01", "02" in the bottom-right of each frame */
     .film-frame-number {
       position: absolute;
       bottom: 8px;
@@ -513,7 +395,6 @@
       letter-spacing: 1px;
     }
 
-    /* Small caption below the film strip */
     .about-caption {
       margin-top: 16px;
       font-size: 10px;
@@ -523,17 +404,12 @@
       text-align: center;
     }
 
-    /* =============================================================
-       CONTACT SECTION
-       Centred call-to-action with a mailto link.
-    ============================================================= */
     .contact-section {
       padding: 140px 52px;
       text-align: center;
       position: relative;
     }
 
-    /* Subtle radial orange glow behind the contact section — decorative */
     .contact-section::before {
       content: '';
       position: absolute;
@@ -542,7 +418,6 @@
       pointer-events: none;
     }
 
-    /* Large contact headline e.g. "Een verhaal te vertellen?" */
     .contact-title {
       font-family: 'Fraunces', serif;
       font-weight: 300;
@@ -554,7 +429,6 @@
     }
     .contact-title em { font-style: italic; color: var(--orange); }
 
-    /* Subtext below the contact headline */
     .contact-sub {
       font-size: 13px;
       color: var(--text-dim);
@@ -574,9 +448,6 @@
   border: none;
 }
 
-
-
-    /* The email address link — to change the email, find the <a href="mailto:..."> in the HTML */
     .contact-link {
       font-family: 'Fraunces', serif;
       font-size: 1.9rem;
@@ -584,26 +455,19 @@
       color: var(--orange);
       text-decoration: none;
       letter-spacing: -0.02em;
-      border-bottom: 1px solid rgba(255,122,47,0.3); /* subtle underline */
+      border-bottom: 1px solid rgba(255,122,47,0.3); 
       padding-bottom: 4px;
       transition: border-color 0.2s;
     }
-    /* On hover the underline becomes fully orange */
+
     .contact-link:hover { border-color: var(--orange); }
 
-    /* =============================================================
-       HORIZONTAL RULE
-       The thin faint lines that divide sections.
-    ============================================================= */
     .rule { width: 100%; height: 1px; background: var(--text-faint); }
 
-    /* =============================================================
-       FOOTER
-    ============================================================= */
     footer {
       padding: 36px 52px;
       display: flex;
-      justify-content: space-between; /* copyright left, tagline right */
+      justify-content: space-between; 
       align-items: center;
     }
     footer p {
@@ -611,13 +475,6 @@
       color: var(--text-faint);
     }
 
-    /* =============================================================
-       SCROLL REVEAL ANIMATION
-       Elements with the class "fade-up" start invisible and slightly
-       below their final position. JavaScript (at the bottom) watches
-       when they scroll into view and adds the class "visible",
-       which triggers the transition to full opacity and normal position.
-    ============================================================= */
     .fade-up {
       opacity: 0;
       transform: translateY(24px);
@@ -625,84 +482,52 @@
     }
     .fade-up.visible { opacity: 1; transform: translateY(0); }
 
-    /* =============================================================
-       MOBILE RESPONSIVE STYLES
-       On screens narrower than 768px (phones), switch to single-column
-       layouts and reduce padding so everything still looks good.
-    ============================================================= */
     @media (max-width: 768px) {
-      /* Reduce left/right padding on small screens */
       nav, .section, .hero, .contact-section, footer {
         padding-left: 24px;
         padding-right: 24px;
       }
       .hero { padding-bottom: 56px; }
-      .hero-film { display: none; } /* hide the film strip decoration on mobile */
+      .hero-film { display: none; }
 
-      /* All portfolio cards become single column on mobile */
       .portfolio-grid { grid-template-columns: 1fr; }
       .film-card, .film-card.landscape, .film-card.wide { grid-column: span 1; aspect-ratio: 16/10; }
 
-      /* Pricing cards stack vertically on mobile */
       .pricing-grid { grid-template-columns: 1fr; }
 
-      /* About section stacks vertically on mobile */
       .about-layout { grid-template-columns: 1fr; gap: 48px; }
 
-      /* Less vertical padding on mobile */
       .section { padding-top: 80px; padding-bottom: 80px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- =============================================================
-       CUSTOM CURSOR ELEMENT
-       This is an empty div that gets moved around by JavaScript
-       to follow the mouse. The CSS above styles it as a white circle.
-  ============================================================= -->
   <div class="cursor" id="cursor"></div>
 
-  <!-- =============================================================
-       NAVIGATION
-       Fixed top bar with a back link and the brand name.
-       To change the back link destination, edit href="../"
-  ============================================================= -->
   <nav>
     <a href="../" class="nav-back">
       <span class="arrow">
-        <!-- SVG arrow icon pointing left -->
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
           <path d="M9 2L4 7L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
       </span>
       Terug
     </a>
-    <!-- Brand name on the right side of the nav -->
     <span class="nav-label">Zeevlam</span>
   </nav>
 
-  <!-- =============================================================
-       HERO SECTION
-       Full-screen opening with the big title, tagline and CTA button.
-       To edit: change the text inside hero-eyebrow, hero-title,
-       hero-desc, and the hero-cta button text.
-  ============================================================= -->
   <section class="hero">
 
-    <!-- Decorative orange glow (background effect, not text) -->
     <div class="hero-glow"></div>
 
-    <!-- Film strip SVG on the right side of the hero.
-         This is a purely decorative illustration — not a real image.
-         To make it more or less visible, change opacity on .hero-film in CSS. -->
     <svg class="hero-film" viewBox="0 0 420 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-      <!-- outer border of the film strip -->
+
       <rect x="40" y="20" width="340" height="860" rx="6" fill="none" stroke="#ff7a2f" stroke-width="1.5"/>
-      <!-- top and bottom dark bands (the sprocket hole areas) -->
+
       <rect x="40" y="20" width="340" height="60" fill="#ff7a2f" opacity="0.3"/>
       <rect x="40" y="820" width="340" height="60" fill="#ff7a2f" opacity="0.3"/>
-      <!-- top sprocket holes (the small rectangles along the top edge) -->
+
       <rect x="55" y="33" width="24" height="32" rx="3" fill="#ff7a2f" opacity="0.75"/>
       <rect x="93" y="33" width="24" height="32" rx="3" fill="#ff7a2f" opacity="0.75"/>
       <rect x="131" y="33" width="24" height="32" rx="3" fill="#ff7a2f" opacity="0.75"/>
@@ -711,7 +536,7 @@
       <rect x="245" y="33" width="24" height="32" rx="3" fill="#ff7a2f" opacity="0.75"/>
       <rect x="283" y="33" width="24" height="32" rx="3" fill="#ff7a2f" opacity="0.75"/>
       <rect x="321" y="33" width="24" height="32" rx="3" fill="#ff7a2f" opacity="0.75"/>
-      <!-- bottom sprocket holes -->
+
       <rect x="55" y="833" width="24" height="32" rx="3" fill="#ff7a2f" opacity="0.75"/>
       <rect x="93" y="833" width="24" height="32" rx="3" fill="#ff7a2f" opacity="0.75"/>
       <rect x="131" y="833" width="24" height="32" rx="3" fill="#ff7a2f" opacity="0.75"/>
@@ -720,28 +545,24 @@
       <rect x="245" y="833" width="24" height="32" rx="3" fill="#ff7a2f" opacity="0.75"/>
       <rect x="283" y="833" width="24" height="32" rx="3" fill="#ff7a2f" opacity="0.75"/>
       <rect x="321" y="833" width="24" height="32" rx="3" fill="#ff7a2f" opacity="0.75"/>
-      <!-- horizontal lines dividing the film into frames -->
+
       <line x1="40" y1="230" x2="380" y2="230" stroke="#ff7a2f" stroke-width="0.5" opacity="0.4"/>
       <line x1="40" y1="400" x2="380" y2="400" stroke="#ff7a2f" stroke-width="0.5" opacity="0.4"/>
       <line x1="40" y1="570" x2="380" y2="570" stroke="#ff7a2f" stroke-width="0.5" opacity="0.4"/>
       <line x1="40" y1="740" x2="380" y2="740" stroke="#ff7a2f" stroke-width="0.5" opacity="0.4"/>
-      <!-- play button icon in the centre of the film strip -->
+
       <circle cx="210" cy="455" r="55" fill="none" stroke="#ff7a2f" stroke-width="1.5" opacity="0.7"/>
       <polygon points="196,430 196,480 243,455" fill="#ff7a2f" opacity="0.55"/>
     </svg>
 
-    <!-- The actual text content of the hero -->
     <div class="hero-content">
-      <!-- Small label above the title — EDIT THIS to change the category text -->
+
       <span class="hero-eyebrow">Videografie & storytelling</span>
 
-      <!-- Main title — the <em> tag makes "Zeev" italic and orange -->
       <h1 class="hero-title"><em>Zee</em>vlam</h1>
 
-      <!-- Tagline paragraph — EDIT THIS to change the description -->
       <p class="hero-desc">Storytelling, visuele ondersteuning van projecten, prachtige momenten vereeuwigen</p>
 
-      <!-- CTA button — href="#portfolio" scrolls down to the portfolio section -->
       <a href="#portfolio" class="hero-cta">
         Bekijk werk
         <!-- Arrow icon inside the button -->
@@ -752,13 +573,6 @@
     </div>
   </section>
 
-  <!-- =============================================================
-       PORTFOLIO SECTION
-       Grid of film/video project cards.
-       To add a new card: copy one of the <div class="film-card"> blocks,
-       paste it inside .portfolio-grid, and update the text and colours.
-       To link a card to a YouTube video, wrap it in an <a href="..."> tag.
-  ============================================================= -->
   <div class="rule"></div>
   <section class="section" id="portfolio">
     <span class="section-label">Portfolio</span>
@@ -766,9 +580,8 @@
 
     <div class="portfolio-grid">
 
-      <!-- PROJECT 1: landscape card (spans 2 columns) -->
       <div class="film-card landscape fade-up">
-        <!-- Background gradient — change fb-1 to fb-2, fb-3 etc. for different colours -->
+
         <div class="film-bg fb-2">
           <iframe 
             width="560" 
@@ -782,26 +595,25 @@
     
           </iframe>
         </div>
-        <!-- Text overlay at the bottom of the card -->
+
         <div class="film-overlay">
-          <!-- Play icon top-right, appears on hover -->
+
           <div class="play-indicator">
             <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
               <polygon points="3,2 3,10 11,6" fill="#ff7a2f"/>
             </svg>
           </div>
-          <!-- Project number top-left -->
+
           <span class="film-number">01</span>
-          <!-- Category label — EDIT THIS -->
+
           <span class="film-tag">Trouwfilm - Greek island wedding</span>
-          <!-- Project title — EDIT THIS -->
+
           <h3 class="film-name">K & A</h3>
-          <!-- Short description, visible on hover — EDIT THIS -->
+
           <p class="film-desc">Een persoonlijke sfeervideo op een prachtig eiland in het westen van Griekenland</p>
         </div>
       </div>
 
-      <!-- PROJECT 2: portrait card (1 column) -->
       <div class="film-card fade-up" style="transition-delay:0.1s">
         <div class="film-bg fb-2">
           <iframe 
@@ -829,7 +641,6 @@
         </div>
       </div>
 
-      <!-- PROJECT 3: portrait card (1 column) -->
       <div class="film-card fade-up" style="transition-delay:0.05s">
         <div class="film-bg fb-3">
            <iframe 
@@ -856,7 +667,6 @@
         </div>
       </div>
 
-      <!-- PROJECT 4: portrait card (1 column) -->
       <div class="film-card landscape fade-up" style="transition-delay:0.15s">
         <div class="film-bg fb-4">
          <iframe 
@@ -884,37 +694,11 @@
         </div>
       </div>
 
-      <!-- PROJECT 5: wide card (spans all 3 columns) -->
-      <!--<div class="film-card wide fade-up">
-        <div class="film-bg fb-5">
-          <svg class="film-deco" viewBox="0 0 900 280" preserveAspectRatio="xMidYMid slice">
-            <line x1="0" y1="0" x2="900" y2="280" stroke="#ff7a2f" stroke-width="0.4"/>
-            <line x1="900" y1="0" x2="0" y2="280" stroke="#ff7a2f" stroke-width="0.4"/>
-            <rect x="300" y="60" width="300" height="160" fill="none" stroke="#ff7a2f" stroke-width="0.8"/>
-            <rect x="320" y="80" width="260" height="120" fill="none" stroke="#ff7a2f" stroke-width="0.4"/>
-            <polygon points="430,120 430,200 490,160" fill="#ff7a2f" opacity="0.5"/>
-          </svg>
-        </div>
-        <div class="film-overlay">
-          <div class="play-indicator">
-            <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-              <polygon points="3,2 3,10 11,6" fill="#ff7a2f"/>
-            </svg>
-          </div>
-          <span class="film-number">05</span>
-          <span class="film-tag">Corporate film · Luchtvaart</span>
-          <h3 class="film-name">Charleroi Airport — Aankomsten</h3>
-          <p class="film-desc">Institutionele film over de dagelijkse operaties en mensen achter de schermen van de luchthaven. Lucht, grond, mensen.</p>
-        </div>
-      </div> 
-      -->
+     
 
     </div>
   </section>
 
-  <!-- =============================================================
-       diensten SECTION
-  ============================================================= -->
   <div class="rule"></div>
   <section class="section" id="tarieven">
     <span class="section-label">Diensten</span>
@@ -922,9 +706,9 @@
 
     <div class="pricing-grid">
 
-      <!-- Tier 1: Basis -->
+
       <div class="pricing-card fade-up">
-        <!--<div class="pricing-tier">Formeel</div> -->
+ 
         <div class="pricing-price">Corporate</div>
         <p class="pricing-note">Marketing en branding</p>
         <ul class="pricing-features">
@@ -937,10 +721,9 @@
         </ul>
       </div>
 
-      <!-- Tier 2: Branded — "featured" adds orange border + badge -->
       <div class="pricing-card fade-up" style="transition-delay:0.1s">
         <a href="https://loryphotography.be" target="_blank" class="pricing-badge" style="text-decoration:none; cursor:none;">Met ervaren fotografe!</a>
-        <!--<div class="pricing-tier">A very special day</div>-->
+
         <div class="pricing-price">Trouwfeesten</div>
         <p class="pricing-note">Vastleggen van een prachtige gebeurtenis</p>
         <ul class="pricing-features">
@@ -954,9 +737,9 @@
         </ul>
       </div>
 
-      <!-- Tier 3: Cinematic -->
+
       <div class="pricing-card fade-up" style="transition-delay:0.2s">
-        <!--<div class="pricing-tier">Cinematic</div>-->
+
         <div class="pricing-price">Social media</div>
         <p class="pricing-note">Short-form content</p>
         <ul class="pricing-features">
@@ -972,33 +755,27 @@
     </div>
   </section>
 
-  <!-- =============================================================
-       ABOUT / AANPAK SECTION
-       Two columns: text left, decorative film strip right.
-       To edit: change the paragraph text in .about-text.
-       The film strip on the right is purely decorative.
-  ============================================================= -->
   <div class="rule"></div>
   <section class="section" id="over">
     <div class="about-layout">
 
-      <!-- Left column: text -->
+
       <div>
         <span class="section-label">Aanpak</span>
         <h2 class="section-title fade-up" style="margin-bottom:36px">Het verhaal<br><em>eerst</em></h2>
         <div class="about-text fade-up">
-          <!-- EDIT THESE paragraphs to change the about text -->
+
           <p>Zeevlam is Louis Biebuyck, iemand met een passie voor visuele content en communiceren van gevoelens via beeld en media.</p>
           <p>Het verhaal maakt de beelden, niet omgekeerd. Van formele bedrijfsvideos tot melancholische aftermovies en zelfs rom-com gestijlde trouwvideos.</p>
           <p>Louis is een sociale kameleon, en wilt met iedereen samenwerken. Een idee? neem gerust contact op!</p>
         </div>
       </div>
 
-      <!-- Right column: decorative film strip illustration -->
+
       <div class="about-visual fade-up">
         <div class="about-filmstrip">
           <div class="about-filmstrip-inner">
-            <!-- These are just decorative empty frames with numbers -->
+  
            <div class="film-frame">
               <img src="../images/Schermafbeelding 2025-08-03 222504.png" style="width:100%; height:100%; object-fit:cover; display:block;" />
               <span class="film-frame-number">01</span>
@@ -1022,21 +799,15 @@
     </div>
   </section>
 
-  <!-- =============================================================
-       CONTACT SECTION
-       To change the email address, edit both the href="mailto:..."
-       and the visible text inside the <a> tag below.
-  ============================================================= -->
   <div class="rule"></div>
   <section class="contact-section">
     <h2 class="contact-title fade-up">Een verhaal<br>te <em>vertellen?</em></h2>
     <p class="contact-sub fade-up">Neem contact op en we bespreken uw project.</p>
-    <!-- EDIT THIS: change the email address in both places -->
+
     <a href="mailto:zeevlamfilms@gmail.com" class="contact-link fade-up">zeevlamfilms@gmail.com</a>
 
     <div class="fade-up" style="display:flex; gap:16px; justify-content:center; margin-top:40px;">
   
-  <!-- YouTube button — replace the URL with the actual channel -->
   <a href="https://www.youtube.com/@zeevlam" target="_blank" style="display:inline-flex; align-items:center; gap:10px; padding:10px 24px; border:1px solid rgba(255,122,47,0.3); border-radius:9999px; color:var(--text-dim); text-decoration:none; font-size:12px; letter-spacing:2px; text-transform:uppercase; transition:border-color 0.2s, color 0.2s;">
     <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
       <path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.7 15.5V8.5l6.3 3.5-6.3 3.5z"/>
@@ -1044,7 +815,6 @@
     YouTube
   </a>
 
-  <!-- Instagram button — replace the URL with the actual account -->
   <a href="https://www.instagram.com/zeevlamfilms" target="_blank" style="display:inline-flex; align-items:center; gap:10px; padding:10px 24px; border:1px solid rgba(255,122,47,0.3); border-radius:9999px; color:var(--text-dim); text-decoration:none; font-size:12px; letter-spacing:2px; text-transform:uppercase; transition:border-color 0.2s, color 0.2s;">
     <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
       <path d="M12 2.2c3.2 0 3.6 0 4.9.1 3.3.2 4.8 1.7 5 5 .1 1.3.1 1.6.1 4.8 0 3.2 0 3.6-.1 4.8-.2 3.3-1.7 4.8-5 5-1.3.1-1.6.1-4.9.1-3.2 0-3.6 0-4.8-.1-3.3-.2-4.8-1.7-5-5C2.2 15.6 2.2 15.3 2.2 12c0-3.2 0-3.6.1-4.8.2-3.3 1.7-4.8 5-5 1.2-.1 1.6-.1 4.7-.1zM12 0C8.7 0 8.3 0 7.1.1 2.7.3.3 2.7.1 7.1.0 8.3 0 8.7 0 12c0 3.3 0 3.7.1 4.9.2 4.4 2.6 6.8 7 7C8.3 24 8.7 24 12 24s3.7 0 4.9-.1c4.4-.2 6.8-2.6 7-7 .1-1.2.1-1.6.1-4.9 0-3.3 0-3.7-.1-4.9C23.7 2.7 21.3.3 16.9.1 15.7 0 15.3 0 12 0zm0 5.8a6.2 6.2 0 1 0 0 12.4A6.2 6.2 0 0 0 12 5.8zm0 10.2a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.4-11.8a1.4 1.4 0 1 0 0 2.8 1.4 1.4 0 0 0 0-2.8z"/>
@@ -1056,36 +826,19 @@
     
   </section>
 
-  <!-- =============================================================
-       FOOTER
-       EDIT the copyright year and tagline as needed.
-  ============================================================= -->
   <footer>
     <p>&copy; 2025 Zeevlam</p>
     <p>Videografie & storytelling — België (v1.09)</p>
   </footer>
 
   <script>
-    // ============================================================
-    // CUSTOM CURSOR
-    // Moves the white dot element to wherever the mouse is.
-    // If you want to remove the custom cursor, delete this block
-    // and remove cursor: none from the body CSS and delete the
-    // <div class="cursor"> element above.
-    // ============================================================
+
     const cursor = document.getElementById('cursor');
     document.addEventListener('mousemove', e => {
       cursor.style.left = e.clientX + 'px';
       cursor.style.top  = e.clientY + 'px';
     });
 
-    // ============================================================
-    // SCROLL REVEAL
-    // IntersectionObserver watches all elements with class "fade-up".
-    // When they scroll into view (threshold: 12% visible), it adds
-    // the class "visible" which triggers the CSS transition to
-    // make them appear. This creates the scroll-in animation effect.
-    // ============================================================
     const io = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting) entry.target.classList.add('visible');
