@@ -147,6 +147,20 @@
    
     .hero-title em { font-style: italic; color: var(--orange); }
 
+    .cat-video > div,
+.cat-video iframe {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 177.78vh;
+  height: 100vh;
+  min-width: 100%;
+  min-height: 56.25vw;
+  transform: translate(-50%, -50%);
+  border: none;
+  pointer-events: none;
+}
+
     .hero-desc {
       font-size: 13px;
       line-height: 1.85;
@@ -678,49 +692,19 @@
 
 <div class="cat-section" id="drone">
   <div class="cat-video">
-    <iframe
-      src="https://www.youtube.com/embed/vDssLK0WsnA?si=0vqfXxmkxSJXFCJ3?autoplay=1&mute=1&loop=1&controls=0&rel=0"
-      allow="autoplay; encrypted-media">
-    </iframe>
-  </div>
-  <div class="cat-overlay"></div>
-  <span class="cat-number">01</span>
-  <div class="cat-content">
-    <span class="cat-label">Luchtfotografie</span>
-    <h2 class="cat-title">Drone<br><em>footage</em></h2>
-    <p class="cat-desc">Beelden vanuit de lucht die de schaal en schoonheid van elk landschap en evenement laten zien.</p>
-  </div>
+    <div id="player-drone"></div>
+ </div>
 </div>
 
 <div class="cat-section" id="trouwfilms">
   <div class="cat-video">
-    <iframe
-      src="https://www.youtube.com/embed/YOUR_VIDEO_ID?autoplay=1&mute=1&loop=1&controls=0&rel=0&playlist=YOUR_VIDEO_ID"
-      allow="autoplay; encrypted-media">
-    </iframe>
-  </div>
-  <div class="cat-overlay"></div>
-  <span class="cat-number">02</span>
-  <div class="cat-content">
-    <span class="cat-label">Trouwfilm</span>
-    <h2 class="cat-title">Trouw<em>feesten</em></h2>
-    <p class="cat-desc">Elke trouwdag is anders. Elk gevoel, elke blik, elk moment — vastgelegd zoals het was.</p>
+    <div id="player-trouw"></div>
   </div>
 </div>
 
 <div class="cat-section" id="overig">
   <div class="cat-video">
-    <iframe
-      src="https://www.youtube.com/embed/YOUR_VIDEO_ID?autoplay=1&mute=1&loop=1&controls=0&rel=0&playlist=YOUR_VIDEO_ID"
-      allow="autoplay; encrypted-media">
-    </iframe>
-  </div>
-  <div class="cat-overlay"></div>
-  <span class="cat-number">03</span>
-  <div class="cat-content">
-    <span class="cat-label">Corporate & evenementen</span>
-    <h2 class="cat-title">Bedrijfs<em>film</em></h2>
-    <p class="cat-desc">Van oefeningen tot beurzen, van communicatie tot branding — verhalen die werken voor uw organisatie.</p>
+    <div id="player-overig"></div>
   </div>
 </div>
 
@@ -982,30 +966,55 @@
     <p>Videografie & storytelling — België (v1.11)</p>
   </footer>
 
-  <script>
-
-    const cursor = document.getElementById('cursor');
-    document.addEventListener('mousemove', e => {
-      cursor.style.left = e.clientX + 'px';
-      cursor.style.top  = e.clientY + 'px';
-    });
-
-    const io = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) entry.target.classList.add('visible');
-      });
-    }, { threshold: 0.12 });
-
-    const catObserver = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) entry.target.classList.add('in-view');
+  <script src="https://www.youtube.com/iframe_api"></script>
+<script>
+  const cursor = document.getElementById('cursor');
+  document.addEventListener('mousemove', e => {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top  = e.clientY + 'px';
   });
-}, { threshold: 0.25 });
 
-document.querySelectorAll('.cat-section').forEach(el => catObserver.observe(el));
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
 
-    document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
-  </script>
+  const catObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('in-view');
+    });
+  }, { threshold: 0.25 });
+  document.querySelectorAll('.cat-section').forEach(el => catObserver.observe(el));
+</script>
+  
+  <script>
+  function onYouTubeIframeAPIReady() {
+    createPlayer('player-drone',  'vDssLK0WsnA?si=0vqfXxmkxSJXFCJ3');
+    createPlayer('player-trouw',  'YOUR_VIDEO_ID');
+    createPlayer('player-overig', 'YOUR_VIDEO_ID');
+  }
+
+  function createPlayer(elementId, videoId) {
+    new YT.Player(elementId, {
+      videoId: videoId,
+      playerVars: {
+        autoplay: 1,
+        mute: 1,
+        loop: 1,
+        controls: 0,
+        showinfo: 0,
+        rel: 0,
+        modestbranding: 1,
+        playlist: videoId
+      },
+      events: {
+        onReady: e => e.target.playVideo()
+      }
+    });
+  }
+</script>
 
 </body>
 </html>
