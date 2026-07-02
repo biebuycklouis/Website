@@ -276,6 +276,107 @@
       transition: background 0.3s;
     }
 
+    .cat-section {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  padding: 0 52px 80px;
+}
+
+.cat-video {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.cat-video iframe {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 177.78vh;
+  height: 100vh;
+  min-width: 100%;
+  min-height: 56.25vw;
+  transform: translate(-50%, -50%);
+  border: none;
+  pointer-events: none;
+}
+
+.cat-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(22,12,4,0.95) 0%,
+    rgba(22,12,4,0.4) 50%,
+    rgba(22,12,4,0.2) 100%
+  );
+  z-index: 1;
+}
+
+.cat-content {
+  position: relative;
+  z-index: 2;
+  max-width: 700px;
+}
+
+.cat-label {
+  display: block;
+  font-size: 10px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 16px;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.cat-title {
+  font-family: 'Fraunces', serif;
+  font-weight: 300;
+  font-size: clamp(3rem, 7vw, 7rem);
+  line-height: 0.92;
+  letter-spacing: -0.04em;
+  color: var(--text);
+  margin-bottom: 24px;
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.8s 0.1s ease, transform 0.8s 0.1s ease;
+}
+.cat-title em { font-style: italic; color: var(--orange); }
+
+.cat-desc {
+  font-size: 12px;
+  line-height: 1.85;
+  color: var(--text-dim);
+  max-width: 340px;
+  font-weight: 300;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.7s 0.2s ease, transform 0.7s 0.2s ease;
+}
+
+.cat-section.in-view .cat-label,
+.cat-section.in-view .cat-title,
+.cat-section.in-view .cat-desc {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.cat-number {
+  position: absolute;
+  top: 40px;
+  right: 52px;
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: rgba(255,122,47,0.3);
+  z-index: 2;
+}
+
     .pricing-card:hover { background: rgba(255,122,47,0.04); }
 
     .pricing-card.featured {
@@ -563,7 +664,7 @@
 
       <p class="hero-desc">Storytelling, visuele ondersteuning van projecten, prachtige momenten vereeuwigen</p>
 
-      <a href="#portfolio" class="hero-cta">
+      <a href="#categorieen" class="hero-cta">
         Bekijk werk
         <!-- Arrow icon inside the button -->
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
@@ -572,6 +673,56 @@
       </a>
     </div>
   </section>
+
+  <div id="categorieen"></div>
+
+<div class="cat-section" id="drone">
+  <div class="cat-video">
+    <iframe
+      src="https://www.youtube.com/embed/YOUR_VIDEO_ID?autoplay=1&mute=1&loop=1&controls=0&rel=0&playlist=YOUR_VIDEO_ID"
+      allow="autoplay; encrypted-media">
+    </iframe>
+  </div>
+  <div class="cat-overlay"></div>
+  <span class="cat-number">01</span>
+  <div class="cat-content">
+    <span class="cat-label">Luchtfotografie</span>
+    <h2 class="cat-title">Drone<br><em>footage</em></h2>
+    <p class="cat-desc">Beelden vanuit de lucht die de schaal en schoonheid van elk landschap en evenement laten zien.</p>
+  </div>
+</div>
+
+<div class="cat-section" id="trouwfilms">
+  <div class="cat-video">
+    <iframe
+      src="https://www.youtube.com/embed/YOUR_VIDEO_ID?autoplay=1&mute=1&loop=1&controls=0&rel=0&playlist=YOUR_VIDEO_ID"
+      allow="autoplay; encrypted-media">
+    </iframe>
+  </div>
+  <div class="cat-overlay"></div>
+  <span class="cat-number">02</span>
+  <div class="cat-content">
+    <span class="cat-label">Trouwfilm</span>
+    <h2 class="cat-title">Trouw<em>feesten</em></h2>
+    <p class="cat-desc">Elke trouwdag is anders. Elk gevoel, elke blik, elk moment — vastgelegd zoals het was.</p>
+  </div>
+</div>
+
+<div class="cat-section" id="overig">
+  <div class="cat-video">
+    <iframe
+      src="https://www.youtube.com/embed/YOUR_VIDEO_ID?autoplay=1&mute=1&loop=1&controls=0&rel=0&playlist=YOUR_VIDEO_ID"
+      allow="autoplay; encrypted-media">
+    </iframe>
+  </div>
+  <div class="cat-overlay"></div>
+  <span class="cat-number">03</span>
+  <div class="cat-content">
+    <span class="cat-label">Corporate & evenementen</span>
+    <h2 class="cat-title">Bedrijfs<em>film</em></h2>
+    <p class="cat-desc">Van oefeningen tot beurzen, van communicatie tot branding — verhalen die werken voor uw organisatie.</p>
+  </div>
+</div>
 
   <div class="rule"></div>
   <section class="section" id="portfolio">
@@ -828,7 +979,7 @@
 
   <footer>
     <p>&copy; 2025 Zeevlam</p>
-    <p>Videografie & storytelling — België (v1.10)</p>
+    <p>Videografie & storytelling — België (v1.11)</p>
   </footer>
 
   <script>
@@ -844,6 +995,14 @@
         if (entry.isIntersecting) entry.target.classList.add('visible');
       });
     }, { threshold: 0.12 });
+
+    const catObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) entry.target.classList.add('in-view');
+  });
+}, { threshold: 0.25 });
+
+document.querySelectorAll('.cat-section').forEach(el => catObserver.observe(el));
 
     document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
   </script>
