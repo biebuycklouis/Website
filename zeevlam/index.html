@@ -1023,7 +1023,7 @@
 
   <footer>
     <p>&copy; 2025 Zeevlam</p>
-    <p>Videografie & storytelling — België (v1.11)</p>
+    <p>Videografie & storytelling — België (v1.13)</p>
   </footer>
 
   <script src="https://www.youtube.com/iframe_api"></script>
@@ -1057,10 +1057,36 @@
 </script>
   
   <script>
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      document.getElementById('loader').classList.add('hidden');
+    }, 2000);
+  });
+
+  const cursor = document.getElementById('cursor');
+  document.addEventListener('mousemove', e => {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top  = e.clientY + 'px';
+  });
+
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
+
+  const catObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('in-view');
+    });
+  }, { threshold: 0.25 });
+  document.querySelectorAll('.cat-section').forEach(el => catObserver.observe(el));
+
   function onYouTubeIframeAPIReady() {
     createPlayer('player-drone',  'vDssLK0WsnA');
     createPlayer('player-trouw',  'YOUR_VIDEO_ID');
-    createPlayer('player-overig', 'vDssLK0WsnA');
+    createPlayer('player-overig', 'UqNFGnTB6SA');
   }
 
   function createPlayer(elementId, videoId) {
@@ -1082,6 +1108,8 @@
     });
   }
 </script>
+
+<script src="https://www.youtube.com/iframe_api"></script>
 
 </body>
 </html>
