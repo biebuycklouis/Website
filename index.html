@@ -379,19 +379,20 @@
     .fb-5 { background: linear-gradient(160deg, #1a0b02 0%, #4a2006 100%); }
 
     .film-overlay {
-      position: absolute;
-      inset: 0;
-      padding: 28px;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      background: linear-gradient(to top, rgba(22,12,4,0.98) 0%, rgba(22,12,4,0.1) 55%, transparent 100%);
-      transition: background 0.4s;
-      pointer-events: none;
-    }
-    .film-card:hover .film-overlay {
-      background: linear-gradient(to top, rgba(22,12,4,0.99) 0%, rgba(22,12,4,0.55) 100%);
-    }
+  position: absolute;
+  inset: 0;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  background: linear-gradient(to top, rgba(22,12,4,0.98) 0%, rgba(22,12,4,0.1) 55%, transparent 100%);
+  transition: background 0.4s;
+  pointer-events: none;
+}
+
+.film-card:hover .film-overlay {
+  background: transparent;
+}
 
     .film-tag {
       font-size: 9px;
